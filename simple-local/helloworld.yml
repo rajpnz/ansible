@@ -1,4 +1,20 @@
 - hosts: all
-  tasks:
-    - shell: echo "hello world"
 
+  vars_prompt:
+    - name: "your_name"
+      prompt: "What is your name?"
+      private: no
+
+  tasks:
+
+  - name: echo hello world
+    shell: echo "hello world"
+
+  - name: print out the hostname of target
+    command: hostname
+
+  - name: print out your name
+    command: echo names is {{your_name}}
+
+  - debug:
+      msg: "Your name is {{your_name}}"
